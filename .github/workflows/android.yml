@@ -11,31 +11,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # FORÇA NODE 22 ESTÁVEL
       - uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      # INSTALA TUDO
       - run: npm install
 
-      # USA BUILD DO IONIC DIRETO (EVITA ng build)
-      - run: npx ionic build
+      - run: npx ng build --configuration production --no-progress
 
-      # CAPACITOR SYNC
       - run: npx cap add android || true
       - run: npx cap sync android
 
-      # JAVA
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      # BUILD APK
       - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
 
-      # EXPORT APK
       - uses: actions/upload-artifact@v4
         with:
           name: apk
