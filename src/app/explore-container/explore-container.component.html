@@ -1,0 +1,90 @@
+
+  <!--<div id="container">
+  <strong>{{ name }}</strong>
+  <p>
+    Explore
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://ionicframework.com/docs/components"
+      >UI Components</a
+    >
+  </p>
+</div>
+   -->
+
+
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Formulário de Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Nome -->
+  <ion-item>
+    <ion-label position="stacked">Nome</ion-label>
+    <ion-input [(ngModel)]="nome" placeholder="Digite seu nome"></ion-input>
+  </ion-item>
+
+  <!-- Email -->
+  <ion-item>
+    <ion-label position="stacked">Email</ion-label>
+    <ion-input [(ngModel)]="email" type="email"></ion-input>
+  </ion-item>
+
+  <!-- Telefone -->
+  <ion-item>
+    <ion-label position="stacked">Telefone</ion-label>
+    <ion-input [(ngModel)]="telefone" type="tel"></ion-input>
+  </ion-item>
+
+  <!-- Gênero -->
+  <ion-list>
+    <ion-list-header>Gênero</ion-list-header>
+    <ion-radio-group [(ngModel)]="genero">
+      <ion-item>
+        <ion-label>Masculino</ion-label>
+        <ion-radio value="masculino"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Feminino</ion-label>
+        <ion-radio value="feminino"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <!-- Interesses -->
+  <ion-list>
+    <ion-list-header>Interesses</ion-list-header>
+
+    <ion-item>
+      <ion-label>Esporte</ion-label>
+      <ion-checkbox [(ngModel)]="esporte"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Música</ion-label>
+      <ion-checkbox [(ngModel)]="musica"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tecnologia</ion-label>
+      <ion-checkbox [(ngModel)]="tecnologia"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <!-- Termos -->
+  <ion-item>
+    <ion-label>Aceito os termos</ion-label>
+    <ion-checkbox [(ngModel)]="termos"></ion-checkbox>
+  </ion-item>
+
+  <!-- Botões -->
+  <ion-button expand="block" (click)="salvar()">Salvar</ion-button>
+  <ion-button expand="block" color="medium" (click)="limpar()">Limpar</ion-button>
+
+</ion-content>

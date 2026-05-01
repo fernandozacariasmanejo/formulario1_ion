@@ -1,0 +1,7 @@
+{
+  "name": "formulario1_ion",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
