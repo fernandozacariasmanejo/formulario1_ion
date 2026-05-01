@@ -11,37 +11,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # FORÇA NODE 22 GLOBAL
+      # FORÇA NODE 22 ESTÁVEL
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
-      # LIMPA INSTALAÇÃO E GARANTE NODE CERTO
-      - name: Clean install
-        run: |
-          node -v
-          npm -v
-          npm install
+      # INSTALA TUDO
+      - run: npm install
 
-      # BUILD ANGULAR (FORÇADO)
-      - name: Build Angular
-        run: npx ng build --configuration production
+      # USA BUILD DO IONIC DIRETO (EVITA ng build)
+      - run: npx ionic build
 
+      # CAPACITOR SYNC
       - run: npx cap add android || true
       - run: npx cap sync android
 
+      # JAVA
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      - name: Build APK
-        run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug
+      # BUILD APK
+      - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
 
+      # EXPORT APK
       - uses: actions/upload-artifact@v4
         with:
           name: apk
