@@ -11,12 +11,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # FORÇA NODE 22 GLOBAL
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
-      - run: npm install
-      - run: npm run build
+      # LIMPA INSTALAÇÃO E GARANTE NODE CERTO
+      - name: Clean install
+        run: |
+          node -v
+          npm -v
+          npm install
+
+      # BUILD ANGULAR (FORÇADO)
+      - name: Build Angular
+        run: npx ng build --configuration production
 
       - run: npx cap add android || true
       - run: npx cap sync android
@@ -26,7 +36,11 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
+      - name: Build APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
       - uses: actions/upload-artifact@v4
         with:
