@@ -17,9 +17,9 @@ jobs:
 
       - run: npm install
 
-      - run: npx ng build --configuration production --no-progress
+      # 🔥 IMPORTANTE: build Ionic correto
+      - run: npx ionic build
 
-      - run: npx cap add android || true
       - run: npx cap sync android
 
       - uses: actions/setup-java@v4
